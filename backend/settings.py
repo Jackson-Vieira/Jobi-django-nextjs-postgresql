@@ -26,10 +26,12 @@ dotenv.read_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = os.environ.get('DEBUG')
+DEBUG = False
+
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -158,5 +160,7 @@ SIMPLE_JWT = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+
+   'EXCEPTION_HANDLER': 'utils.custom_exception_handler.custom_exception_handler'
 }

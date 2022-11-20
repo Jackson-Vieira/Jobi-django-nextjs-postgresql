@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from rest_framework.pagination import PageNumberPagination
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -37,6 +37,24 @@ class JobsViewSet(mixins.CreateModelMixin,
     pagination_class = PageNumberPagination # Basic 
     pagination_class.page_size = 3
 
+
+    #permissions
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def destroy(self, request, *args, **kwargs):
+        job = self.get_object()
+        if job.user == request.user:
+            return super().destroy(request, *args, **kwargs)
+        else:
+            return Response({'message':'You can not delete this job'},status=status.HTTP_403_FORBIDDEN)
+
+    def update(self, request, *args, **kwargs):
+        job = self.get_object()
+        if job.user == request.user:
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response({'message':'You can not edit this job'},status=status.HTTP_403_FORBIDDEN)
+        
 @api_view(['GET'])
 def getTopicStats(request, topic):
     args = {'title__icontains':topic}
