@@ -6,7 +6,10 @@ from rest_framework import status
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import Job
+from .filters import JobsFilter
 from .serializers import JobSerializer
 
 from django.db.models import Avg, Min, Max, Count
@@ -23,6 +26,8 @@ class JobsViewSet(mixins.CreateModelMixin,
                    
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = JobsFilter
 
 @api_view(['GET'])
 def getTopicStats(request, topic):
