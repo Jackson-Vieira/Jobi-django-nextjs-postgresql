@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
+from rest_framework.pagination import PageNumberPagination
+
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -26,8 +28,14 @@ class JobsViewSet(mixins.CreateModelMixin,
                    
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+
+    # Filter and Search
     filter_backends = (DjangoFilterBackend,)
     filterset_class = JobsFilter
+
+    # Pagination
+    pagination_class = PageNumberPagination # Basic 
+    pagination_class.page_size = 3
 
 @api_view(['GET'])
 def getTopicStats(request, topic):

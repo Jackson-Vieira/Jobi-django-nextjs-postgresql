@@ -143,3 +143,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # GDAL AND GEOS PATH
 GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH ')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
+
