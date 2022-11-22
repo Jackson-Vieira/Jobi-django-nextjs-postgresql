@@ -57,3 +57,21 @@ def updateUser(request):
     serializer = UserSerializer(user)
     
     return Response(serializer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def uploadResume(request):
+    user = request.user
+    resume = request.FILES['resume']
+    print(resume)
+    if resume == '':
+        return Response({'error': 'Please upload your resume'})
+
+    user.userprofile.resume = resume
+    user.userprofile.save()
+    serializer = UserSerializer(user, many=False)
+
+    return Response({
+        'message':'uploaded succesfully',
+        'user':serializer.data
+    })

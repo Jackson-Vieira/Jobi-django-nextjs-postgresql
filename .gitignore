@@ -1,2 +1,4 @@
 venv
 *.env
+AWS_Configuration.txt
+aws_s3_policy.txt
