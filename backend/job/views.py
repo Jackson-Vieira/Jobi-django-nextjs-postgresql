@@ -15,6 +15,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Job, CandidatesApplied
 from .filters import JobsFilter
 from .serializers import JobSerializer, CandidatesAppliedSerializer
+from .pagination import CustomPageNumberPagination
 
 from django.db.models import Avg, Min, Max, Count
 
@@ -35,12 +36,11 @@ class JobsViewSet(mixins.CreateModelMixin,
     filterset_class = JobsFilter
 
     # Pagination
-    pagination_class = PageNumberPagination # Basic 
-    pagination_class.page_size = 10
-
-
+    pagination_class = CustomPageNumberPagination
+    
     #permissions
     permission_classes = [IsAuthenticatedOrReadOnly]
+
 
     def destroy(self, request, *args, **kwargs):
         job = self.get_object()

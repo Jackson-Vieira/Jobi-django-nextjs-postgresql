@@ -5,11 +5,11 @@ import Head from 'next/head'
 import Header from './Header'
 import Footer from './Footer'
 
-const Layout = ({children, title = 'Jobi'}) => {
+const Layout = ({children, title = 'Home'}) => {
   return (
     <div> 
         <Head>
-            <title>{title}</title>
+            <title>{title} - Jobi</title>
 
             
         </Head>

@@ -7,7 +7,7 @@ export default function JobDetailsPage({job, error}) {
     if (error?.includes("Not found")) return <NotFound />
 
     return (
-      <Layout>
+      <Layout title={job.title}>
         <JobDetail job={job} />
       </Layout>
     )
