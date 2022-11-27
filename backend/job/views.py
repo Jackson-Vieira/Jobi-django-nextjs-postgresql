@@ -36,7 +36,7 @@ class JobsViewSet(mixins.CreateModelMixin,
 
     # Pagination
     pagination_class = PageNumberPagination # Basic 
-    pagination_class.page_size = 3
+    pagination_class.page_size = 10
 
 
     #permissions
