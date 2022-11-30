@@ -22,7 +22,7 @@ const Header = () => {
             </button>
           </Link>
 
-          <Link href="/login">
+          <Link href="/auth/login">
             <button className="loginButtonHeader">
               <span>Login</span>
             </button>

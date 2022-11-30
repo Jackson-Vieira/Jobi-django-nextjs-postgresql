@@ -9,7 +9,7 @@ const Layout = ({children, title = 'Home'}) => {
   return (
     <div> 
         <Head>
-            <title>{title} - Jobi</title>
+            <title>{title}</title>
         </Head>
 
         <Header />

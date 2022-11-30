@@ -1,34 +1,31 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useContext, useEffect } from "react"
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import AuthContext from '../../context/AuthContext'
 
 const Login = () => {
-
+  const {loading, error, isAuthenticated, login} = useContext(AuthContext) // Contenxt API
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-
   const router = useRouter()
-
-  const {loading, error, isAuthenticated} = useContext(AuthContext) // Contenxt API
-  
 
   useEffect(() => {
     if(error){
-      alert(error);
+      console.log(error);
     }
-    if(isAuthenticated && !loading){
-      router.push('/');
-    }
-  }, [isAuthenticated, error, loading])
 
+    if(isAuthenticated && !loading){
+      router.push("/");
+    }
+
+  }, [isAuthenticated, error, loading])
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(email, password)
+    login({username: email, password: password})
   }
 
   return (
@@ -36,7 +33,7 @@ const Login = () => {
       <div className="modalWrapper">
         <div className="left">
           <div style={{ width: "100%", height: "100%", position: "relative" }}>
-            <Image src="/images/login.svg" alt="login" layout='fill'
+            <Image src="/images/login.svg" alt="login" layout="fill"
             
             />
           </div>
@@ -44,7 +41,7 @@ const Login = () => {
         <div className="right">
           <div className="rightContentWrapper">
             <div className="headerWrapper">
-              <h2> LOGIN</h2>
+              <h2>LOGIN</h2>
             </div>
             <form className="form" onSubmit={submitHandler}>
               <div className="inputWrapper">
