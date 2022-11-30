@@ -1,3 +1,8 @@
 1. Melhorar o sistema de filtros -> permitir multiplos filtros de um mesmo campo
 2. Melhorar o design (Imagens, botões,)
 3. Navbar, footer (Azul...)
+
+V2:
+algoritmo para pegar a variação de preço do produto dos registros __lastUpdateDate __atualPriceProduct
+apenas para gerar informações sobre os registros.
+

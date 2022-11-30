@@ -6,7 +6,6 @@ from rest_framework import routers
 router = routers.SimpleRouter()
 router.register(r'jobs', views.JobsViewSet)
 
-
 urlpatterns = [
     path('stats/<str:topic>/', views.getTopicStats, name='get_topic_stats'),
     path('jobs/<str:id>/apply/', views.applyToJob, name='apply_to_job'),

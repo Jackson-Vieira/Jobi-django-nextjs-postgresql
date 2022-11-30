@@ -10,8 +10,6 @@ const Layout = ({children, title = 'Home'}) => {
     <div> 
         <Head>
             <title>{title} - Jobi</title>
-
-            
         </Head>
 
         <Header />
