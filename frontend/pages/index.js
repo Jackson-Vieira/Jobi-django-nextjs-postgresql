@@ -4,8 +4,6 @@ import Home from '../components/layout/Home'
 import axios from 'axios'
 
 
-import {IsAuthenticatedUser} from '../utils/isAuthenticated'
-
 export default function Index({data}) {
   return (
     <Layout>
