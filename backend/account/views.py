@@ -17,21 +17,22 @@ def register(request):
     
     user = SignUpSerializer(data=data)
 
-    if user.is_valid():
+    if user.is_valid(raise_exception=False):
         if not User.objects.filter(username=data.get('email')).exists():
             user.save(username=data.get('email'), password=make_password(data.get('password'))) # move to serializer.py
             return Response(
-            {'User registered.'}, 
+            {'message':'User registered.'}, 
             status=status.HTTP_201_CREATED
             )
         else:
             return Response(
-                {'message':'User already exists'}, 
+                {'error':'User already exists'}, 
                 status=status.HTTP_400_BAD_REQUEST
                 )
-    else:
-        return Response(user.errors)
-
+    return Response(
+                {'error':user.errors}, 
+                status=status.HTTP_400_BAD_REQUEST
+                )
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

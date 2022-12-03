@@ -3,10 +3,12 @@ import Link from 'next/link'
 import { useState, useContext, useEffect } from "react"
 import { useRouter } from 'next/router'
 
+import {toast} from 'react-toastify'
+
 import AuthContext from '../../context/AuthContext'
 
 const Login = () => {
-  const {loading, error, isAuthenticated, login} = useContext(AuthContext) // Contenxt API
+  const {loading, error, isAuthenticated, login, clearErrors} = useContext(AuthContext) // Contenxt API
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -14,7 +16,8 @@ const Login = () => {
 
   useEffect(() => {
     if(error){
-      console.log(error);
+      toast.error(error);
+      clearErrors();
     }
 
     if(isAuthenticated && !loading){
@@ -73,7 +76,7 @@ const Login = () => {
                 </button>
               </div>
               <p style={{ textDecoration: "none" }} className="signup">
-                New to Jobbee? <Link href="/register">Create an account</Link>
+                New to Jobbee? <Link href="/auth/register">Create an account</Link>
               </p>
             </form>
           </div>

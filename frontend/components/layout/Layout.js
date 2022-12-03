@@ -5,16 +5,15 @@ import Head from 'next/head'
 import Header from './Header'
 import Footer from './Footer'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Layout = ({children, title = 'Home'}) => {
   return (
     <div> 
         <Head>
             <title>{title}</title>
         </Head>
-
-        <Header />
-        {children}
-        <Footer />
 
         <Script
         strategy="beforeInteractive"
@@ -35,7 +34,12 @@ const Layout = ({children, title = 'Home'}) => {
         strategy="beforeInteractive"
         src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
         ></Script>
-        
+
+        <ToastContainer position='bottom-right' />
+        <Header />
+        {children}
+        <Footer />
+
     </div>
   )
 }
