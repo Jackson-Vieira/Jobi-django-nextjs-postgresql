@@ -38,6 +38,7 @@ def register(request):
 @permission_classes([IsAuthenticated])
 def currentUser(request):
     user = UserSerializer(request.user)
+    print(user.data)
     return Response(user.data)
 
 
@@ -65,7 +66,6 @@ def updateUser(request):
 def uploadResume(request):
     user = request.user
     resume = request.FILES['resume']
-    print(resume)
     if resume == '':
         return Response({'error': 'Please upload your resume'})
 

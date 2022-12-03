@@ -6,15 +6,13 @@ const allowedParams= [
     "jobType",
     "education",
     "experience",
-    "max_salary",
-    "min_salary",
+    "salary",
 ];
 
 export async function middleware(req) {
     const url = req.nextUrl; 
     let changed = false;
 
-    console.log(url)
     url.searchParams.forEach((element, key) => {
         if(!allowedParams.includes(key)) {
             url.searchParams.delete(key);
@@ -22,12 +20,11 @@ export async function middleware(req) {
         }
     });
     
-
     if(changed) {
         return NextResponse.redirect(url);
     }
 }
 
 export const config = {
-    matcher: ['/'],
-  }
+    matcher: ['/'], // BUG, FIX WITH REGEX?
+}

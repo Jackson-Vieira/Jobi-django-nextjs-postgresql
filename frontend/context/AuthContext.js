@@ -9,6 +9,7 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [error, setError] = useState(null);
+    const [updated, setUpdated] = useState(false);
 
     const router = useRouter();
 
@@ -63,6 +64,34 @@ export const AuthProvider = ({children}) => {
     };
 
 
+     // Update profile
+     const updateProfile = async({firstName, lastName, email, password}, access_token) => {
+        try {
+            setLoading(true)
+            const res = await axios.put(`${process.env.API_URL}/api/me/update`, {
+                first_name: firstName,
+                last_name: lastName,
+                password,
+                email,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            }
+            )
+
+            if(res.data){
+                setLoading(false)
+                setUser(res.data)
+                router.push('/me')
+            }
+
+        } catch (error) {
+            setLoading(false)
+            setError(error.response && (error.response.data.message || error.response.data.error))
+        }
+    };
 
      // Logout user
      const logout = async() => {
@@ -94,7 +123,6 @@ export const AuthProvider = ({children}) => {
             }
 
         } catch (error) {
-            console.log(1)
             setLoading(false)
             setIsAuthenticated(false)
             setUser(null)
@@ -114,11 +142,15 @@ export const AuthProvider = ({children}) => {
                 user,
                 error,
                 isAuthenticated, 
+                updated,
+                setUser,
                 login,
                 logout,
                 loadUser,
                 register,
                 clearErrors,
+                updateProfile,
+                setUpdated,
             }}
         >
             {children}
